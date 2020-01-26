@@ -7,7 +7,19 @@ Doorkeeper.configure do
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_from_credentials do
-    Authorizations::Password.new(email: params[:email], password: params[:password]).call
+    ::Authorizations::Authenticators::Password.new(
+      email: params[:email],
+      password: params[:password]
+    ).call
+  end
+
+  resource_owner_from_assertion do
+    # server.client
+    return unless params[:provider].present? && params[:assertion].present?
+    ::Authorizations::Authenticators::Assertion.new(
+      provider: params[:provider],
+      assertion: params[:assertion]
+    ).call
   end
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
@@ -277,7 +289,7 @@ Doorkeeper.configure do
   #   http://tools.ietf.org/html/rfc6819#section-4.4.2
   #   http://tools.ietf.org/html/rfc6819#section-4.4.3
   #
-  grant_flows %w[password client_credentials]
+  grant_flows %w[password client_credentials assertion]
 
   # Allows to customize OAuth grant flows that +each+ application support.
   # You can configure a custom block (or use a class respond to `#call`) that must

@@ -10,11 +10,16 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 4.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'doorkeeper', '~> 5.2.3'
+gem 'doorkeeper-grants_assertion', '~> 0.2.0'
+
+gem 'faraday', '~> 1.0.0'
+gem 'oj', '~> 3.10.1'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-byebug'
 end
 
 group :development do
