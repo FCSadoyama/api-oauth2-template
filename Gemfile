@@ -6,7 +6,7 @@ ruby '2.7.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 
-gem 'mysql2', '>= 0.4.4'
+gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 4.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'doorkeeper', '~> 5.2.3'
