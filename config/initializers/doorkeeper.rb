@@ -14,8 +14,7 @@ Doorkeeper.configure do
   end
 
   resource_owner_from_assertion do
-    # server.client
-    return unless params[:provider].present? && params[:assertion].present?
+    return unless server.client && params[:provider].present? && params[:assertion].present?
     ::Authorizations::Authenticators::Assertion.new(
       provider: params[:provider],
       assertion: params[:assertion]
