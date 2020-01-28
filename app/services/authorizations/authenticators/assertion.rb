@@ -7,7 +7,7 @@ module Authorizations
       end
 
       def call
-        return if user_info.error.any?
+        raise ExceptionHandler::CustomError.new(**user_info.error) if user_info.error.any?
         ::Authorizations::SocialAuth::User.new(user_info).call
       end
 
