@@ -7,7 +7,7 @@ module Authorizations
       end
 
       def call
-        raise ExceptionHandler::CustomError.new(**user_info.error) if user_info.error.any?
+        raise ExceptionHandler::CustomError.new(**user_info.error) if user_info.error.present?
         ::Authorizations::SocialAuth::User.new(user_info).call
       end
 
@@ -16,7 +16,13 @@ module Authorizations
       attr_reader :provider, :assertion
 
       def user_info
-        @user_info ||= integration.new(assertion).call
+        @user_info ||= OpenStruct.new(
+          integration_response.merge(provider: provider)
+        )
+      end
+
+      def integration_response
+        integration.new(assertion).call
       end
 
       def integration

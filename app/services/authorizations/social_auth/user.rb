@@ -20,6 +20,7 @@ module Authorizations
 
       def user_by_email
         user = ::User.find_by(email: email)
+        return unless user.present?
         user.tap do |u|
           u.update_columns(provider: provider, uid: id)
         end
@@ -33,7 +34,7 @@ module Authorizations
           password_confirmation: password,
           provider: provider,
           uid: id
-        )
+        ).tap { |user| user.save }
       end
     end
   end
