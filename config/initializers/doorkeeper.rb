@@ -14,11 +14,12 @@ Doorkeeper.configure do
   end
 
   resource_owner_from_assertion do
-    return unless server.client && params[:provider].present? && params[:assertion].present?
-    ::Authorizations::Authenticators::Assertion.new(
-      provider: params[:provider],
-      assertion: params[:assertion]
-    ).call
+    if server.client && params[:provider].present? && params[:assertion].present?
+      ::Authorizations::Authenticators::Assertion.new(
+        provider: params[:provider],
+        assertion: params[:assertion]
+      ).call
+    end
   end
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
