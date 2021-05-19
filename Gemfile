@@ -7,7 +7,7 @@ ruby '2.7.0'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 
 gem 'sqlite3', '~> 1.4'
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 gem 'bcrypt', '~> 3.1.7'
 gem 'doorkeeper', '~> 5.2.3'
 gem 'doorkeeper-grants_assertion', '~> 0.2.0'
